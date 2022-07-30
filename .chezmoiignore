@@ -11,4 +11,5 @@
 .config/rofi
 .config/sway
 .config/waybar
+launch-sway.sh
 {{ end }}
