@@ -1,0 +1,14 @@
+# if the os is darwin
+{{ if ne .chezmoi.os "darwin" }}
+.zshrc_darwin
+.zshenv_darwin
+{{ end }}
+# if the os is linux
+{{ if ne .chezmoi.os "linux"}}
+.zshrc_linux
+.zshenv_linux
+.config/kitty
+.config/rofi
+.config/sway
+.config/waybar
+{{ end }}

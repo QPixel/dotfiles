@@ -1,0 +1,3 @@
+. "$HOME/.cargo/env"
+
+ssh-add --apple-use-keychain ~/.ssh/id\_ed25519 2>/dev/null
