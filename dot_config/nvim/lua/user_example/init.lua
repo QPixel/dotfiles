@@ -38,7 +38,7 @@ local config = {
     -- },
   },
 
-  -- set vim options here (vim.<first_key>.<second_key> =  value)
+  -- set vim options here (vim.<first_key>.<second_key> = value)
   options = {
     opt = {
       -- set to true or false etc.
@@ -56,6 +56,7 @@ local config = {
       diagnostics_enabled = true, -- enable diagnostics at start
       status_diagnostics_enabled = true, -- enable diagnostics in statusline
       icons_enabled = true, -- disable icons in the UI (disable if no nerd font is available, requires :PackerSync after changing)
+      ui_notifications_enabled = true, -- disable notifications when toggling UI elements
     },
   },
   -- If you need more control, you can use the function()...end notation
@@ -264,15 +265,21 @@ local config = {
     ["mason-null-ls"] = { -- overrides `require("mason-null-ls").setup(...)`
       -- ensure_installed = { "prettier", "stylua" },
     },
+    ["mason-nvim-dap"] = { -- overrides `require("mason-nvim-dap").setup(...)`
+      -- ensure_installed = { "python" },
+    },
   },
 
   -- LuaSnip Options
   luasnip = {
-    -- Add paths for including more VS Code style snippets in luasnip
-    vscode_snippet_paths = {},
     -- Extend filetypes
     filetype_extend = {
       -- javascript = { "javascriptreact" },
+    },
+    -- Configure luasnip loaders (vscode, lua, and/or snipmate)
+    vscode = {
+      -- Add paths for including more VS Code style snippets in luasnip
+      paths = {},
     },
   },
 

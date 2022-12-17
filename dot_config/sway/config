@@ -12,19 +12,27 @@ set $right l
 
 ### Output configuration
 output * bg /home/pixel/Downloads/wallhaven-q22r57.png fill
-
+output * scale 1.8
 # set monitor config
-output DP-1 resolution 1920x1080@74.924Hz position 1920,650
-output HDMI-A-1 resolution 1920x1080@60Hz position 840,160 transform 90
-output DVI-D-1 resolution 1440x900@59.887Hz position 3840,910
+#output DP-1 resolution 1920x1080@74.924Hz position 1920,650
+#output HDMI-A-1 resolution 1920x1080@60Hz position 840,160 transform 90
+#output DVI-D-1 resolution 1440x900@59.887Hz position 3840,910
+
+# input stuff
+input "1452:834:Apple_Internal_Keyboard_/_Trackpad" {
+    natural_scroll enabled
+}
+seat seat0 xcursor_theme Adwaita 24
 
 ### Key bindings:
     # Start a terminal
-    bindsym $mod+Return exec kitty
+    bindsym $mod+Return exec LIBGL_ALWAYS_SOFTWARE=1 kitty
     # Kill focused window
     bindsym $mod+Shift+q kill
     # Start your launcher
+    bindsym $mod+Shift+d exec networkmanager_dmenu
     bindsym $mod+d exec "rofi -modi drun,run -show drun"
+    # screenshots
     bindsym $mod2+Shift+t exec 'grim -g "$(slurp)" - | swappy -f -'	
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -38,6 +46,26 @@ output DVI-D-1 resolution 1440x900@59.887Hz position 3840,910
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    # BRIGHTNESS AND AUDIO 
+    #define XKB_KEY_XF86MonBrightnessUp    0x1008FF02  /* Monitor/panel brightness */
+    #define XKB_KEY_XF86MonBrightnessDown  0x1008FF03  /* Monitor/panel brightness */
+    bindsym XF86MonBrightnessUp exec sudo light -s sysfs/backlight/apple-panel-bl -A 10
+    bindsym XF86MonBrightnessDown exec sudo light -s sysfs/backlight/apple-panel-bl -U 10
+    bindsym XF86MonBrightnessUp+Shift exec sudo light -s sysfs/leds/kbd_backlight -A 10
+    bindsym XF86MonBrightnessDown+Shift exec sudo light -s sysfs/leds/kbd_backlight -U 10
+    #define XKB_KEY_XF86AudioLowerVolume	0x1008FF11   /* Volume control down        */
+    #define XKB_KEY_XF86AudioRaiseVolume	0x1008FF13   /* Volume control up          */
+    bindsym XF86AudioRaiseVolume exec pamixer -i 8
+    bindsym XF86AudioLowerVolume exec pamixer -d 8
+    #define XKB_KEY_XF86AudioMute   0x1008FF12   /* Mute sound from the system 
+    bindsym XF86AudioMute exec pamixer -t
+    #define XKB_KEY_XF86AudioPlay   0x1008FF14   /* Start playing of audio >   
+    #define XKB_KEY_XF86AudioStop   0x1008FF15   /* Stop playing audio         
+    #define XKB_KEY_XF86AudioPrev   0x1008FF16   /* Previous track             
+    #define XKB_KEY_XF86AudioNext   0x1008FF17   /* Next track                 
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
+    bindsym XF86AudioPlay exec playerctl play-pause
 #
 # Moving around:
 #
@@ -175,9 +203,11 @@ bar {
 
 # dbus stuff
 exec hash dbus-update-activation-environment 2>/dev/null && \
-     dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+     dbus-update-activation-environment --systemd --all
+
+#systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # setup pipewire
-exec $HOME/pipewire.sh
+#exec $HOME/pipewire.sh
 
 #border
 default_border pixel 1
@@ -188,8 +218,9 @@ titlebar_border_thickness 0
 titlebar_padding 0
 
 #gaps
-gaps inner 4
-gaps top 4
+gaps inner 2
+
+
 
 # transparency
 #set $opacity 0.9
