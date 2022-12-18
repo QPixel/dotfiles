@@ -1,10 +1,13 @@
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-fi
+#if [ -n "$DESKTOP_SESSION" ];then
+#    eval $(gnome-keyring-daemon --start)
+#    export SSH_AUTH_SOCK
+#fi
+
+export HISTFILE=~/.zsh_history
+export HISTSIZE=50000
 
 . "$HOME/.cargo/env"
 export VOLTA_HOME="$HOME/.volta"
-export PATH="$HOME/Local Repos/depot_tools:$VOLTA_HOME/bin:/home/pixel/.spicetify:$PATH"
+export PATH="$VOLTA_HOME/bin:/home/pixel/.spicetify:$PATH"
 export CHROME_EXECUTABLE=/usr/bin/chromium
 export SHELL=/bin/zsh
