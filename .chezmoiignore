@@ -13,3 +13,6 @@
 .config/waybar
 launch-sway.sh
 {{ end }}
+
+LICENSE
+README.md
