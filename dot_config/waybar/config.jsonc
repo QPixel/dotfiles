@@ -1,7 +1,7 @@
 {
   // "layer": "top", // Waybar at top layer
   // "position": "bottom", // Waybar position (top|bottom|left|right)
-  "height": 35, // Waybar height (to be removed for auto height)
+  "height": 38, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   "spacing": 8, // Gaps between modules (4px)
   // Choose the order of the modules
@@ -86,6 +86,7 @@
       "critical": 15
     },
     "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% {icon} ",
     "format-icons": [
       "",
       "",
@@ -96,7 +97,7 @@
     "max-length": 25
   },
   "custom/spotify": {
-    "format": " {icon}{}",
+    "format": "{icon}{}",
     "escape": true,
     "return-type": "json",
     "format-icons": {
@@ -105,10 +106,8 @@
     },
     "max-length": 40,
     //  "interval": 30,
-    "on-click": "spt playback --toggle",
+    "on-click": "playerctl play-pause",
     "on-click-right": "kitty spt",
-    //"exec": "zscroll --delay 0.2 --match-command \"spt playback\" --update-check true \"spt playback\" &",
-    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{markup_escape(title)}} - {{artist}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-    "exec-if": "pgrep spotify"
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{markup_escape(title)}} - {{artist}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F"
   }
 }

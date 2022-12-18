@@ -5,6 +5,7 @@
   font-size: 13px;
   min-height: 0;
   /*padding-right: 2px;*/
+  background: rgba(17, 21, 26, 0.4);
 }
 
 window#waybar {
