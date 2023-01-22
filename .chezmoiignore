@@ -13,3 +13,4 @@
 .config/waybar
 launch-sway.sh
 {{ end }}
+install.sh
