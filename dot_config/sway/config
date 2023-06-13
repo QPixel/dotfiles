@@ -15,8 +15,9 @@ output * bg /home/pixel/Downloads/wallhaven-q22r57.png fill
 
 # set monitor config
 output DP-1 resolution 1920x1080@74.924Hz position 1920,650
-output HDMI-A-1 resolution 1920x1080@60Hz position 840,160 transform 90
-output DVI-D-1 resolution 1440x900@59.887Hz position 3840,910
+output HDMI-A-1 resolution 1920x1080@60Hz position 2759,500 transform 90
+output DVI-D-1 resolution 1920x1080@60.000Hz position 3840,910
+focus output DVI-D-1
 
 ### Key bindings:
     # Start a terminal
@@ -178,6 +179,9 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 # setup pipewire
 exec $HOME/pipewire.sh
+
+# setup opentabletdriver
+exec /usr/bin/otd &
 
 #border
 default_border pixel 1
