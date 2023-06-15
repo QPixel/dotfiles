@@ -1,39 +1,18 @@
 {
   // "layer": "top", // Waybar at top layer
   // "position": "bottom", // Waybar position (top|bottom|left|right)
-  "height": 20, // Waybar height (to be removed for auto height)
+  "height": 35, // Waybar height (to be removed for auto height)
   // "width": 1280, // Waybar width
   "spacing": 8, // Gaps between modules (4px)
   // Choose the order of the modules
-  "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-  "modules-right": ["pulseaudio", "cpu", "memory", "clock", "tray"],
+  "modules-left": ["custom/icon","sway/workspaces", "sway/mode", "sway/window"],
+  "modules-right": ["custom/spotify", "pulseaudio", "cpu", "memory","network", "clock", "tray"],
   // Modules configuration
-  // "sway/workspaces": {
-  //     "disable-scroll": true,
-  //     "all-outputs": true,
-  //     "format": "{name}: {icon}",
-  //     "format-icons": {
-  //         "1": "",
-  //         "2": "",
-  //         "3": "",
-  //         "4": "",
-  //         "5": "",
-  //         "urgent": "",
-  //         "focused": "",
-  //         "default": ""
-  //     }
-  // },
-  "keyboard-state": {
-    "numlock": true,
-    "capslock": true,
-    "format": "{name} {icon}",
-    "format-icons": {
-      "locked": "",
-      "unlocked": ""
-    }
-  },
   "sway/mode": {
     "format": "<span style=\"italic\">{}</span>"
+  },
+  "custom/icon": {
+    "format": ""
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -47,7 +26,7 @@
     "spacing": 10
   },
   "clock": {
-    // "timezone": "America/New_York",
+    "timezone": "America/Los_Angeles",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}"
   },
@@ -59,7 +38,6 @@
     "format": "{}% "
   },
   "network": {
-    // "interface": "wlp2*", // (Optional) To force the use of this interface
     "format-wifi": "{essid} ({signalStrength}%) ",
     "format-ethernet": "{ipaddr}/{cidr} ",
     "tooltip-format": "{ifname} via {gwaddr} ",
@@ -68,7 +46,6 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}"
   },
   "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",
     "format-bluetooth": "{volume}% {icon} {format_source}",
     "format-bluetooth-muted": " {icon} {format_source}",
@@ -88,17 +65,21 @@
   },
   "sway/workspaces": {
     "all-outputs": true
+  },
+  "custom/spotify": {
+    "format": " {icon}{}",
+    "escape": true,
+    "return-type": "json",
+    "format-icons": {
+      "Playing": " ",
+      "Paused": " "
+    },
+    "max-length": 40,
+    //  "interval": 30,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "kitty spotify_player",
+    //"exec": "zscroll --delay 0.2 --match-command \"spt playback\" --update-check true \"spt playback\" &",
+    "exec": "playerctl -a metadata --format '{\"text\": \"{{markup_escape(title)}} - {{artist}}\", \"tooltip\": \"{{markup_escape(title)}} - {{artist}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+    "exec-if": "pgrep spotify"
   }
-  // "custom/media": {
-  //   "format": "{icon} {}",
-  //   "return-type": "json",
-  //   "max-length": 40,
-  //   "format-icons": {
-  //     "spotify": "",
-  //     "default": "🎜"
-  //   },
-  //   "escape": true,
-  //   "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-  //   // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-  // }
 }
