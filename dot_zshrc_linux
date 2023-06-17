@@ -8,7 +8,7 @@ export ZSH="$HOME/repos/ohmyzsh"
 source ~/repos/zsh-snap/znap.zsh
 
 # OMZ
-znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
+#znap source ohmyzsh/ohmyzsh lib/{git,theme-and-appearance}
 
 # Plugins
 znap source marlonrichert/zsh-autocomplete
@@ -28,6 +28,22 @@ alias cat="bat"
 #replace vim and vi with nvim 
 alias vim="nvim"
 alias vi="nvim"
+
+# ssh shit
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+
+
+# history
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000   # the number of items for the internal history list
+export SAVEHIST=1000000   # maximum number of items for the history file
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+
+
+eval "$(zoxide init zsh --cmd cd)"
 
 # remember to install starship
 eval "$(starship init zsh)"
