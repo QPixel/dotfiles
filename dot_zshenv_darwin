@@ -1,4 +1,3 @@
 . "$HOME/.cargo/env"
 . "$HOME/.tokens"
-export THEOS=~/theos
 # ssh-add --apple-use-keychain ~/.ssh/id\_ed25519 2>/dev/null
