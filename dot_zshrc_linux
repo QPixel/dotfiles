@@ -30,7 +30,7 @@ alias vim="nvim"
 alias vi="nvim"
 
 # ssh shit
-export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
+#export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/gcr/ssh
 
 
 # history
