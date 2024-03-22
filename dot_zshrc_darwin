@@ -1,26 +1,29 @@
-zstyle ':znap:*' repos-dir ~/znap
-source ~/repos/zsh-snap/znap.zsh
-# plugins 
+# Download Znap, if it's not there yet.
+[[ -r ~/Repos/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git ~/repos/znap
 
-# starship 
-export SPACESHIP_PROMPT_ASYNC=FALSE
-#znap eval starship 'starship init zsh --print-full-init'
-#znap prompt
+
+zstyle ':znap:*' repos-dir ~/repos/znap
+source ~/repos/zsh-snap/znap.zsh
 
 znap source marlonrichert/zsh-autocomplete
 
-zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' min-input 2
 
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-completions
 
+export NVM_LAZY_LOAD=true
+export NVM_COMPLETION=true
+export NVM_AUTO_USE=true
 
-# User configuration
+znap source lukechilds/zsh-nvm
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -33,8 +36,8 @@ fi
 # export ARCHFLAGS="-arch x86_64"
 
 # Aliases
-alias ls="exa"
-alias tree="exa --tree"
+alias ls="eza"
+alias tree="eza --tree"
 
 # change cat to bat
 alias cat="bat"
@@ -63,11 +66,6 @@ alias gx='gitx --all'
 alias got='git '
 alias get='git '
 
-
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
 # bun completions
 [ -s "/Users/rileysmith/.bun/_bun" ] && source "/Users/rileysmith/.bun/_bun"
 
@@ -76,37 +74,9 @@ export BUN_INSTALL="/Users/rileysmith/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Path Stuff
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$HOME/.new_local/bin
-export PATH=/opt/homebrew/opt/mysql-client/bin:$PATH
-export JAVA_HOME=`/usr/libexec/java_home -v 17.0.8`
+export PATH=$PATH:/Users/riley/.spicetify
 
-# zoxide
 eval "$(zoxide init zsh)"
-
-# rbenv
-eval "$(rbenv init - zsh)"
 
 eval "$(starship init zsh)"
 
-if [[ $TERM_PROGRAM != "WarpTerminal" ]]; then
-  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-fi
-
-
-# (
-# if ! ssh-add -l >/dev/null 2>&1; then
-#    ssh-add --apple-load-keychain >/dev/null 2>&1
-# fi &
-# )
-#znap function _sshadd ssh 'eval "$(ssh-add --apple-load-keychain)"'
-# compctl -K _sshadd ssh
-
-source /Users/riley/.docker/init-zsh.sh || true # Added by Docker Desktop
-
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=$PATH:/Users/riley/.spicetify

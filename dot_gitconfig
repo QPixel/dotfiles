@@ -1,0 +1,55 @@
+[user]
+	signingkey = 59D9762F674151DF
+	name = Riley Smith
+	email = riley@rileysmith.me
+[maintenance]
+	repo = /Users/rileysmith/znap/zsh-autocomplete
+	repo = /Users/rileysmith/znap/zsh-autosuggestions
+	repo = /Users/rileysmith/znap/zsh-completions
+	repo = /Users/riley/znap/zsh-autocomplete
+	repo = /Users/riley/znap/zsh-autosuggestions
+	repo = /Users/riley/znap/zsh-completions
+	repo = /Users/riley/repos/znap/marlonrichert/zsh-autocomplete
+	repo = /Users/riley/repos/znap/zsh-users/zsh-autosuggestions
+	repo = /Users/riley/repos/znap/zsh-users/zsh-completions
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+    pager = delta
+	autocrlf = input
+	safecrlf = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+  	side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  br = branch
+  hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  type = cat-file -t
+  dump = cat-file -p
